@@ -1,7 +1,9 @@
-.global {
+:root {
   --color: '#fff';
+  --brandBlue: '#00f'; /* Color */
+  background-color: var(--brandBlue);
 }
 
-.xabrau {
+html {
   --borderWidth: '20px';
 }
