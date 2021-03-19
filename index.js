@@ -1,6 +1,7 @@
 /* eslint-disable */
 const postcss = require('postcss');
 const fs = require('fs');
+const path = require('path');
 const postcssParser = require('postcss-values-parser');
 const parse = postcssParser.parse;
 
@@ -56,6 +57,13 @@ module.exports = (opts = {}) => {
   // whether the node is a parent without children
   const isEmptyParent = (node) => Object(node.nodes).length === 0;
 
+  const escapeForJS = (string) =>
+    string
+      .toString()
+      .replace(/\\([\s\S])|(')/g, '\\$1$2')
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '\\r');
+
   const readFile = (from) =>
     new Promise((resolve, reject) => {
       fs.readFile(from, 'utf8', (error, result) => {
@@ -81,8 +89,37 @@ module.exports = (opts = {}) => {
   const asyncTransform = async (root) => {
     const rootRules = await customPropertiesPromise(opts.importFrom[0]);
     const customProperties = getCustomPropertiesFromRoot(rootRules);
-    console.log(customProperties);
+
+    const fileName = 'testCompile.js';
+    const newFileName = path.resolve('./tests', fileName);
+    await writeCustomPropertiesToExports(customProperties, newFileName);
   };
+
+  async function writeCustomPropertiesToExports(customProperties, to) {
+    const jsContents = Object.keys(customProperties)
+      .reduce((jsLines, name) => {
+        jsLines.push(
+          `\t\t'${escapeForJS(name)}': '${escapeForJS(customProperties[name])}'`
+        );
+
+        return jsLines;
+      }, [])
+      .join(',\n');
+    const js = `module.exports = {\n\tcustomProperties: {\n${jsContents}\n\t}\n};\n`;
+
+    await writeFile(to, js);
+  }
+
+  const writeFile = (to, text) =>
+    new Promise((resolve, reject) => {
+      fs.writeFile(to, text, (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
 
   return {
     postcssPlugin: 'postcss-extract-custom-properties',
