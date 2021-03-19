@@ -13,6 +13,7 @@ async function run(input, output, opts = {}) {
 
 it('does something', async () => {
   await run(':root { --color: #fafafa }', ':root { --color: #fafafa }', {
-    importFrom: ['./tests/test.css'],
+    importFrom: ['./tests/test.css', './tests/dark.theme.css'],
+    exportTo: './tests',
   });
 });

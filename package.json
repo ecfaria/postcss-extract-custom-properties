@@ -9,7 +9,8 @@
     "custom-properties"
   ],
   "scripts": {
-    "test": "jest-ci --coverage --watch && eslint-ci ."
+    "watch": "jest-ci --watch --coverage && eslint-ci .",
+    "test": "jest-ci --coverage && eslint-ci ."
   },
   "author": "Emilio Faria <emiliocfaria@gmail.com>",
   "license": "MIT",
@@ -63,6 +64,7 @@
     }
   },
   "dependencies": {
+    "lodash.camelcase": "^4.3.0",
     "postcss-values-parser": "^5.0.0"
   }
 }

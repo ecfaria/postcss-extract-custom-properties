@@ -1,0 +1,26 @@
+:root,
+[data-theme='dark'] {
+  --buttonBackgroundHoverColor: #464653;
+  --comparison: #e9eff1; /* brandPaleGreyColor */
+  --dashboardPageBackgroundColor: #23232c; /* brandLightBlackColor */
+  --dashboardPanelBackgroundColor: #18181d;
+  --dashboardPanelBackgroundHoverColor: #000000;
+  --dashboardPanelBorderColor: #18181d;
+  --dashboardPanelTitleColor: #95a0a6;
+  --gridLineColor: #313b3f; /* brandDarkGreyColor */
+  --inputBackgroundColor: #373742;
+  --inputBorderColor: #373742;
+  --inputColor: #b3bdc3;
+  --inputTextHoverColor: #f8f9fb;
+  --inputSeparatorColor: #495156; /* brandMidGreyColor */
+  --linkHoverColor: #f8f9fb;
+  --maxContrastColor: #ffffff;
+  --pageBackgroundColor: #18181d;
+  --pagePanelBackgroundColor: #23232c; /* brandLightBlackColor */
+  --pageTextColor: #909da5;
+  --pageTitleColor: #d7dde0; /* brandLightGreyColor */
+  --sidebarBackgroundColor: #18181d;
+  --tabColor: #909da5;
+  --tabSelectedColor: #d7dde0;
+  --trHover: #373742;
+}

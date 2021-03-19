@@ -2,7 +2,6 @@ const parse = require('postcss-values-parser').parse;
 const { isHtmlRule, isRootRule, isCustomDecl } = require('./utils');
 
 const getCustomPropertiesFromRoot = (root, opts = {}) => {
-  console.log(opts);
   const customPropertiesFromHtmlElement = {};
   const customPropertiesFromRootPseudo = {};
 
@@ -10,8 +9,8 @@ const getCustomPropertiesFromRoot = (root, opts = {}) => {
     const customPropertiesObject = isHtmlRule(rule)
       ? customPropertiesFromHtmlElement
       : isRootRule(rule)
-      ? customPropertiesFromRootPseudo
-      : null;
+        ? customPropertiesFromRootPseudo
+        : null;
 
     if (customPropertiesObject) {
       rule.nodes.slice().forEach((decl) => {

@@ -1,4 +1,5 @@
 /* eslint-disable */
+const camelCase = require('lodash.camelcase');
 const postcss = require('postcss');
 const path = require('path');
 const readFile = require('./src/readFromFile');
@@ -7,6 +8,8 @@ const writeCustomPropertiesToExports = require('./src/writeCustomPropertiesToExp
 
 module.exports = (opts = {}) => {
   // Work with options here
+
+  const { importFrom, exportTo } = opts;
 
   const getCustomPropertiesFromCssFile = async (from) => {
     const css = await readFile(from);
@@ -20,12 +23,23 @@ module.exports = (opts = {}) => {
   };
 
   const asyncTransform = async (root) => {
-    const rootRules = await customPropertiesPromise(opts.importFrom[0]);
-    const customProperties = getCustomPropertiesFromRoot(rootRules);
+    const getRulesByFile = importFrom.map(async (file) => {
+      const rootRules = await customPropertiesPromise(file);
+      const customProperties = getCustomPropertiesFromRoot(rootRules);
+      return {
+        [file]: customProperties,
+      };
+    });
 
-    const fileName = 'testCompile.js';
-    const newFileName = path.resolve('./tests', fileName);
-    await writeCustomPropertiesToExports(customProperties, newFileName);
+    const rulesByFile = await Promise.all(getRulesByFile);
+
+    rulesByFile.forEach(async (file) => {
+      const fileRules = Object.values(file)[0];
+      const fileName =
+        camelCase(path.basename(Object.keys(file)[0], '.css')) + '.js';
+      const newFileName = path.resolve(exportTo, fileName);
+      await writeCustomPropertiesToExports(fileRules, newFileName);
+    });
   };
 
   return {
