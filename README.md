@@ -9,7 +9,7 @@
 **Step 1:** Install plugin:
 
 ```sh
-npm install --save-dev postcss postcss-extract-custom-properties
+npm install --save-dev postcss postcss-custom-properties-extractor
 ```
 
 **Step 2:** Check you project for existed PostCSS config: `postcss.config.js`
