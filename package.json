@@ -1,13 +1,8 @@
 {
-  "name": "postcss-extract-custom-properties",
-  "version": "0.0.0",
-  "description": "PostCSS plugin to extract custom css properites",
-  "keywords": [
-    "postcss",
-    "css",
-    "postcss-plugin",
-    "custom-properties"
-  ],
+  "name": "postcss-custom-properties-extractor",
+  "version": "0.0.1",
+  "description": "PostCSS plugin to extract custom css properites to a JS file.",
+  "keywords": ["postcss", "css", "postcss-plugin", "custom-properties"],
   "scripts": {
     "watch": "jest-ci --watch --coverage && eslint-ci .",
     "test": "jest-ci --coverage && eslint-ci ."
@@ -47,10 +42,7 @@
       "node": true,
       "es6": true
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:jest/recommended"
-    ],
+    "extends": ["eslint:recommended", "plugin:jest/recommended"],
     "rules": {
       "jest/expect-expect": "off"
     }
