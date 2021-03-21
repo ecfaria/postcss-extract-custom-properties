@@ -1,20 +1,8 @@
-# PostCSS Extract Custom Properties
+# PostCSS Custom Properties Extractor
 
-[PostCSS] plugin to extract custom css properites.
+[PostCSS] plugin to extract custom css properites into a JS file.
 
-[PostCSS]: https://github.com/postcss/postcss
-
-```css
-.foo {
-    /* Input example */
-}
-```
-
-```css
-.foo {
-  /* Output example */
-}
-```
+[postcss]: https://github.com/postcss/postcss
 
 ## Usage
 
@@ -36,7 +24,7 @@ and set this plugin in settings.
 ```diff
 module.exports = {
   plugins: [
-+   require('postcss-extract-custom-properties'),
++   require('postcss-custom-properties-extractor'),
     require('autoprefixer')
   ]
 }
